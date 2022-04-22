@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">archive_a: 2022 | MY_BLOG</title>
+  <title itemprop="name">leetcode修炼笔记（二） | MY_BLOG</title>
   
     <link rel="shortcut icon" href="/pic/akuya.jpg">
   
@@ -383,78 +383,252 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 75px;">
-</div>
-<div id="content" class="site-content">
-  <div id="main">
-    <header class="page-header">
-      <h1 class="cat-title">
-      归档</h1>
-      <span class="cat-des">
-        <p>
-        Archives</p>
-      </span>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      leetcode修炼笔记（二）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="">PYF</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2022-4-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
-    <div id="main-part">
-      <article class="art">
-        <div class="art-main">
-          <div class="art-content">
-            <div id="archives">
-              <p style="text-align:right;">
-                [<span id="al_expand_collapse" style="cursor: s-resize;">
-                全部展开/收缩</span>
-              ]</p>
-              
-              
-              
-              
-              
-                
-                <h3 class="al_year">2022年</h3>
-              
-              
-                
-                <ul class="al_mon_list">
-                  <li class="al_li">
-                    <span class="al_mon" style="cursor: s-resize;">
-                      04月(<span id="post-num">
-                      3</span>
-                    篇文章)</span>
-                    <ul class="al_post_list" style="">
-              
-                      <li>
-                        <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-                          <span style="color:#0bf;">
-                          21日09:14:43</span>
-                          leetcode修炼笔记（二）
-                        </a>
-                      </li>
-                      
-              
-              
-              
-              
-              
-                      <li>
-                        <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                          <span style="color:#0bf;">
-                          18日19:50:39</span>
-                          leetcode修炼笔记（一）
-                        </a>
-                      </li>
-                      
-                    </ul>
-                  </li>
-                </ul>
-              
-              
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="题二：链表"><a href="#题二：链表" class="headerlink" title="题二：链表"></a>题二：链表</h1><p>leading:代码随想录  <a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
+<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><p>1.链表在内存中散乱分布，分配机制取决于内存管理</p>
+<p>2.链表定义方式：</p>
+<pre><code class="c++">// 单链表
+struct ListNode &#123;
+    int val;  // 节点上存储的元素
+    ListNode *next;  // 指向下一个节点的指针
+    ListNode(int x) : val(x), next(NULL) &#123;&#125;  // 节点的构造函数
+&#125;;
+</code></pre>
+<p>初始化节点：</p>
+<pre><code class="c++">ListNode* head = new ListNode(5);
+</code></pre>
+<p>也可以不写构造函数，C++默认生成一个构造函数。</p>
+<p>默认构造函数初始化节点：</p>
+<pre><code class="c++">ListNode* head = new ListNode();
+head-&gt;val = 5;
+</code></pre>
+<p>3.c++需要手动释放删除的节点，Java、python有自己的内存回收机制，不用自己手动释放</p>
+<p>4.数组插入&#x2F;删除复杂，查询简单，链表相反。</p>
+<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><h3 id="一、移除链表元素203-移除链表元素-力扣（LeetCode）-leetcode-cn-com"><a href="#一、移除链表元素203-移除链表元素-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="一、移除链表元素203. 移除链表元素 - 力扣（LeetCode） (leetcode-cn.com)"></a>一、移除链表元素<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-linked-list-elements/">203. 移除链表元素 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>解题：</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    ListNode* removeElements(ListNode* head, int val) &#123;
+        while(head != NULL &amp;&amp; head-&gt;val == val)&#123;
+            ListNode* tmp = head;
+            head = head -&gt; next;
+            delete tmp;
+        &#125;
+        ListNode* p = head;
+        while(p != NULL &amp;&amp; p-&gt;next != NULL)&#123;
+            if(p-&gt;next-&gt;val == val)&#123;
+                ListNode* tmp = p-&gt;next;
+                p-&gt;next = p-&gt;next-&gt;next;
+                delete tmp;
+            &#125;
+            else&#123;
+                p = p-&gt;next;
+            &#125;
+        &#125;
+        return head;
+    &#125;
+&#125;;
+</code></pre>
+<p>看了答案，发现一样的代码，他的能过为什么我的过不了，我不李姐~</p>
+<h2 id="二、设计链表代码随想录-programmercarl-com"><a href="#二、设计链表代码随想录-programmercarl-com" class="headerlink" title="二、设计链表代码随想录 (programmercarl.com)"></a>二、设计链表<a target="_blank" rel="noopener" href="https://programmercarl.com/0707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8.html#%E4%BB%A3%E7%A0%81">代码随想录 (programmercarl.com)</a></h2><pre><code class="c++">class MyLinkedList &#123;
+public:
+    struct LinkedNode &#123;
+        int val;
+        LinkedNode* next;
+        LinkedNode(int val):val(val), next(nullptr)&#123;&#125;
+    &#125;;
+
+    MyLinkedList() &#123;
+        _dummyHead = new LinkedNode(0); 
+        _size = 0;
+    &#125;
+
+    int get(int index) &#123;
+        if (index &gt; (_size - 1) || index &lt; 0) &#123;
+            return -1;
+        &#125;
+        LinkedNode* cur = _dummyHead-&gt;next;
+        while(index--)&#123; 
+            cur = cur-&gt;next;
+        &#125;
+        return cur-&gt;val;
+    &#125;
+
+    void addAtHead(int val) &#123;
+        LinkedNode* newNode = new LinkedNode(val);
+        newNode-&gt;next = _dummyHead-&gt;next;
+        _dummyHead-&gt;next = newNode;
+        _size++;
+    &#125;
+
+    void addAtTail(int val) &#123;
+        LinkedNode* newNode = new LinkedNode(val);
+        LinkedNode* cur = _dummyHead;
+        while(cur-&gt;next != nullptr)&#123;
+            cur = cur-&gt;next;
+        &#125;
+        cur-&gt;next = newNode;
+        _size++;
+    &#125;
+
+    void addAtIndex(int index, int val) &#123;
+        if (index &gt; _size) &#123;
+            return;
+        &#125;
+        LinkedNode* newNode = new LinkedNode(val);
+        LinkedNode* cur = _dummyHead;
+        while(index--) &#123;
+            cur = cur-&gt;next;
+        &#125;
+        newNode-&gt;next = cur-&gt;next;
+        cur-&gt;next = newNode;
+        _size++;
+    &#125;
+
+    void deleteAtIndex(int index) &#123;
+        if (index &gt;= _size || index &lt; 0) &#123;
+            return;
+        &#125;
+        LinkedNode* cur = _dummyHead;
+        while(index--) &#123;
+            cur = cur -&gt;next;
+        &#125;
+        LinkedNode* tmp = cur-&gt;next;
+        cur-&gt;next = cur-&gt;next-&gt;next;
+        delete tmp;
+        _size--;
+    &#125;
+
+    void printLinkedList() &#123;
+        LinkedNode* cur = _dummyHead;
+        while (cur-&gt;next != nullptr) &#123;
+            cout &lt;&lt; cur-&gt;next-&gt;val &lt;&lt; &quot; &quot;;
+            cur = cur-&gt;next;
+        &#125;
+        cout &lt;&lt; endl;
+    &#125;
+private:
+    int _size;
+    LinkedNode* _dummyHead;
+&#125;;
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+              </ul>
             </div>
           </div>
         </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
       </article>
-    </div>
-  </div>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                leetcode修炼笔记（一）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "X74dFY8DNLLKijk3I9cPcReI-gzGzoHsz",
+        appKey: "vXQsbwEWS7soC6Tch78aw4Wv",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg" itemprop="image" alt="PYF" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">PYF</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>小小勇士</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
