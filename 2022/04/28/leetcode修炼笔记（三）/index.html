@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">MY_BLOG</title>
+  <title itemprop="name">leetcode修炼笔记（三） | MY_BLOG</title>
   
     <link rel="shortcut icon" href="/pic/akuya.jpg">
   
@@ -383,199 +383,291 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      leetcode修炼笔记（三）</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="">PYF</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2022-4-28<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <div class="notice" style="margin-top:60px">
-    <i class="iconfont icon-notification">
-    </i>
-    <div class="notice-content">hallo 一起玩耍吧...</div>
-  </div>
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/sakura.md.png">
-        </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://space.bilibili.com/33957483" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/bilibili.jpg">
-        </div>
-        <div class="info">
-          <h3>Bilibili</h3>
-          <p>博主的b站视频</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/wangshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>PYF的万事屋</h3>
-          <p>技术服务</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="题三：哈希表"><a href="#题三：哈希表" class="headerlink" title="题三：哈希表"></a>题三：哈希表</h1><p>leading:代码随想录 <a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
+<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><p><strong>1.哈希表用来快速判断一个元素是否出现在集合里（牺牲了空间换取了时间）</strong></p>
+<p>2.哈希碰撞解决方法：</p>
+<p>​    (1). 拉链法：每个索引位置都是一个链表</p>
+<p>​    (2). 线性探测法：当前位置有值就依次向下递推</p>
+<p>3.三种哈希结构：</p>
+<p>​    (1). 数组</p>
+<p>​    (2). set（集合）</p>
+<table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th>底层实现</th>
+<th>是否有序</th>
+<th>数值是否可以重复</th>
+<th>能否更改数值</th>
+<th>查询效率</th>
+<th>增删效率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">std::set</td>
+<td>红黑树</td>
+<td>有序</td>
+<td>否</td>
+<td>否</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td align="left">std::multiset</td>
+<td>红黑树</td>
+<td>有序</td>
+<td>是</td>
+<td>否</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td align="left">std::unordered_set</td>
+<td>哈希表</td>
+<td>无序</td>
+<td>否</td>
+<td>否</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<p>std::unordered_set底层实现为哈希表，std::set 和std::multiset 的底层实现是红黑树，红黑树是一种平衡二叉搜索树，所以key值是有序的，但key不可以修改，改动key值会导致整棵树的错乱，所以只能删除和增加。</p>
+<p>​    (3). map（映射）</p>
+<table>
+<thead>
+<tr>
+<th>映射</th>
+<th>底层实现</th>
+<th>是否有序</th>
+<th>数值是否可以重复</th>
+<th>能否更改数值</th>
+<th>查询效率</th>
+<th>增删效率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>std::map</td>
+<td>红黑树</td>
+<td>key有序</td>
+<td>key不可重复</td>
+<td>key不可修改</td>
+<td>O(logn)</td>
+<td>O(logn)</td>
+</tr>
+<tr>
+<td>std::multimap</td>
+<td>红黑树</td>
+<td>key有序</td>
+<td>key可重复</td>
+<td>key不可修改</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>std::unordered_map</td>
+<td>哈希表</td>
+<td>key无序</td>
+<td>key不可重复</td>
+<td>key不可修改</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<p><strong>std::map 和std::multimap 的key也是有序的，因为底层实现是红黑树（这个问题也经常作为面试题，考察对语言容器底层的理解）。</strong></p>
+<p>当我们要使用集合来解决哈希问题的时候，优先使用unordered_set，因为<strong>它的查询和增删效率是最优的</strong>，如果需要集合是有序的，那么就用set，如果要求不仅有序还要有重复数据的话，那么就用multiset。</p>
+<p>虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，我们依然称之为哈希法。 map也是一样的道理。</p>
+<p><strong>unordered_set在C++11的时候被引入标准库了，而hash_set并没有</strong>，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C++11标准之前民间高手自发造的轮子。</p>
+<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><h3 id="一、有效的字母异位词242-有效的字母异位词-力扣（LeetCode）-leetcode-cn-com"><a href="#一、有效的字母异位词242-有效的字母异位词-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="一、有效的字母异位词242. 有效的字母异位词 - 力扣（LeetCode） (leetcode-cn.com)"></a>一、有效的字母异位词<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-anagram/">242. 有效的字母异位词 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>思路：创建取值数组，建立哈希表表示字母出现次数，依次遍历两个串，先加后减，若哈希表全为0则输出true</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    bool isAnagram(string s, string t) &#123;
+        int record[26] = &#123;0&#125;;
+        for(int i = 0 ; i &lt; s.size() ; i++)&#123;
+            record[s[i]-&#39;a&#39;]+=1;
+        &#125;
+        for(int i = 0 ; i &lt; t.size() ; i++)&#123;
+            record[t[i]-&#39;a&#39;]-=1;
+        &#125;
+        for(int i = 0 ; i &lt; 26 ; i++)&#123;
+            if(record[i] != 0)return false;
+        &#125;
+        return true;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="二、两个数组的交集349-两个数组的交集-力扣（LeetCode）-leetcode-cn-com"><a href="#二、两个数组的交集349-两个数组的交集-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="二、两个数组的交集349. 两个数组的交集 - 力扣（LeetCode） (leetcode-cn.com)"></a>二、两个数组的交集<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays/">349. 两个数组的交集 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>用法：</p>
+<pre><code>创建vector元素：
+vector&lt;int&gt; a;
+
+vector元素的大小：
+a.size()
+
+数组元素的大小：
+sizeof(a)/sizeof(int)
+
+无序集合构建：
+unordered_set&lt;int&gt; result_set;
+result_set.insert(num);
+unordered_set&lt;int&gt; nums_set(nums1.begin(), nums1.end());
+nums_set.find(num)
+
+无序集合转vector数组：
+vector&lt;int&gt;(result_set.begin(), result_set.end());
+</code></pre>
+<p>我的代码：</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;
+        int record[1001] = &#123;0&#125;;
+        for(int i = 0 ; i &lt; nums1.size() ; i++)&#123;
+            if(record[nums1[i]] == 0)record[nums1[i]] = 1;
+        &#125;
+        vector&lt;int&gt; a;
+        for(int i = 0 ; i &lt; nums2.size() ; i++)&#123;
+            if(record[nums2[i]] == 1)record[nums2[i]] = 2;
+        &#125;
+        for(int i = 0 ; i &lt; sizeof(record)/sizeof(int) ; i++)&#123;
+            if(record[i] == 2)a.push_back(i);
+        &#125;
+        return a;
+    &#125;
+&#125;;
+</code></pre>
+<p>他的代码：</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;
+        unordered_set&lt;int&gt; result_set; // 存放结果
+        unordered_set&lt;int&gt; nums_set(nums1.begin(), nums1.end());
+        for (int num : nums2) &#123;
+            // 发现nums2的元素 在nums_set里又出现过
+            if (nums_set.find(num) != nums_set.end()) &#123;
+                result_set.insert(num);
+            &#125;
+        &#125;
+        return vector&lt;int&gt;(result_set.begin(), result_set.end());
+    &#125;
+&#125;
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                leetcode修炼笔记（二）</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "X74dFY8DNLLKijk3I9cPcReI-gzGzoHsz",
+        appKey: "vXQsbwEWS7soC6Tch78aw4Wv",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-  <div class="post-thumb">
-    <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-28 15:04</div>
-      <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="post-title">
-        <h3>leetcode修炼笔记（三）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg" itemprop="image" alt="PYF" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">PYF</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-21 09:04</div>
-      <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title">
-        <h3>leetcode修炼笔记（二）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-18 19:04</div>
-      <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title">
-        <h3>leetcode修炼笔记（一）</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/%E5%88%B7%E9%A2%98/">刷题<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!--  -->
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>小小勇士</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
