@@ -389,7 +389,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/01.png">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -583,7 +583,63 @@ public:
         &#125;
         return vector&lt;int&gt;(result_set.begin(), result_set.end());
     &#125;
-&#125;
+&#125;;
+</code></pre>
+<h3 id="三、快乐数202-快乐数-力扣（LeetCode）-leetcode-cn-com"><a href="#三、快乐数202-快乐数-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="三、快乐数202. 快乐数 - 力扣（LeetCode） (leetcode-cn.com)"></a>三、快乐数<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/happy-number/">202. 快乐数 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>根据随想录上的代码：</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    int getsum(int n)&#123;
+        int sum = 0;
+        while(n)&#123;
+            sum += (n % 10) * (n % 10);
+            n = n / 10;
+        &#125;
+        return sum;
+    &#125;
+
+    bool isHappy(int n) &#123;
+        unordered_set&lt;int&gt; set;
+        while(1)&#123;
+            int sum = getsum(n);
+            if(sum == 1)return true;
+            if(set.find(sum) != set.end())&#123;
+                return false;
+            &#125;else&#123;
+                set.insert(sum);
+            &#125;
+            n = sum;
+        &#125;
+    &#125;
+&#125;;
+</code></pre>
+<p>注意：unordered_set.find()返回的值是一个迭代器(iterator指向目标元素)，没找到会返回end()。</p>
+<pre><code class="c++">unordered_map.insert
+unordered_map.find
+unordered_map.erase
+unordered_map.clear
+unordered_map.count(int)      //返回value出现的次数
+unordered_map.emplace(int)  //插入函数  
+unordered_map.swap(unordered_map)  //交换
+
+unordered_map.empty();  //判断是否为空
+unordered_map.size();      //获取元素个数
+unordered_map.max_size(); //获取最大存储量
+</code></pre>
+<h3 id="四、两数之和1-两数之和-力扣（LeetCode）-leetcode-cn-com"><a href="#四、两数之和1-两数之和-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="四、两数之和1. 两数之和 - 力扣（LeetCode） (leetcode-cn.com)"></a>四、两数之和<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">1. 两数之和 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>使用map构建哈希表，查询nums中每个元素i，在map中寻找target-i</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;
+        unordered_map&lt;int,int&gt; map;
+        for(int i = 0; i &lt; nums.size(); i++)&#123;
+            auto iter = map.find(target - nums[i]);
+            if(iter != map.end())&#123;
+                return &#123;iter -&gt; second, i&#125;;
+            &#125;
+            map.insert(pair&lt;int,int&gt;(nums[i],i));
+        &#125;
+        return &#123;&#125;;
+    &#125;
+&#125;;
 </code></pre>
 
         </div>
@@ -619,7 +675,7 @@ public:
           
             <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/cover/02.png">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/02.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/02.jpg">
               </div>
               <span class="label">
               Next Post</span>
