@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">MY_BLOG</title>
+  <title itemprop="name">leetcode修炼笔记（四）字符串 | MY_BLOG</title>
   
     <link rel="shortcut icon" href="/pic/akuya.jpg">
   
@@ -383,238 +383,277 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/04.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/04.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      leetcode修炼笔记（四）字符串</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="">PYF</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2022-5-4<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <div class="notice" style="margin-top:60px">
-    <i class="iconfont icon-notification">
-    </i>
-    <div class="notice-content">hallo 一起玩耍吧...</div>
-  </div>
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/sakura.md.png">
-        </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://space.bilibili.com/33957483" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/bilibili.jpg">
-        </div>
-        <div class="info">
-          <h3>Bilibili</h3>
-          <p>博主的b站视频</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="/" target="_blank">
-        <div class="img">
-          <img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/startdash/wangshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>PYF的万事屋</h3>
-          <p>技术服务</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="题四：字符串"><a href="#题四：字符串" class="headerlink" title="题四：字符串"></a>题四：字符串</h1><p>leading:代码随想录 <a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
+<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><h3 id="一、反转字符串344-反转字符串-力扣（LeetCode）-leetcode-cn-com"><a href="#一、反转字符串344-反转字符串-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="一、反转字符串344. 反转字符串 - 力扣（LeetCode） (leetcode-cn.com)"></a>一、反转字符串<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string/">344. 反转字符串 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>解题：</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    void reverseString(vector&lt;char&gt;&amp; s) &#123;
+        char temp;
+        for(int i=0; i&lt;s.size()/2; i++)&#123;
+            temp = s[i];
+            s[i] = s[s.size()-1-i];
+            s[s.size()-1-i] = temp;
+        &#125;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="二、反转字符串II541-反转字符串-II-力扣（LeetCode）-leetcode-cn-com"><a href="#二、反转字符串II541-反转字符串-II-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="二、反转字符串II541. 反转字符串 II - 力扣（LeetCode） (leetcode-cn.com)"></a>二、反转字符串II<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string-ii/">541. 反转字符串 II - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>解题：先调整n<em>2</em>k字符内的串反转，之后调整剩余串的情况（1.小于k  2.k~2k）</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    string reverseStr(string s, int k) &#123;
+        char temp;
+        int count = s.size() / (2*k);
+        int remain = s.size() - (count * 2 * k);
+        if(count &gt; 0)&#123;
+            for(int p = 0; p &lt; count; p++)&#123;
+                for(int i = 0; i &lt; k / 2; i++)&#123;
+                    temp = s[i + p * 2 * k];
+                    s[i + p * 2 * k] = s[p*2*k+k-1-i];
+                    s[p*2*k+k-1-i] = temp;
+                &#125;
+            &#125; 
+        &#125;
+        if(remain &lt; k)&#123;
+            for(int i = 0; i &lt; remain/2; i++)&#123;
+                temp = s[i + count * 2 * k];
+                s[i + count * 2 * k] = s[count*2*k+remain-1-i];
+                s[count*2*k+remain-1-i] = temp;
+            &#125;
+        &#125;
+        else&#123;
+            for(int i = 0; i &lt; k / 2; i++)&#123;
+                temp = s[i + count * 2 * k];
+                s[i + count * 2 * k] = s[count*2*k+k-1-i];
+                s[count*2*k+k-1-i] = temp;
+            &#125;
+        &#125;
+        return s;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="三、替换空格剑指-Offer-05-替换空格-力扣（LeetCode）-leetcode-cn-com"><a href="#三、替换空格剑指-Offer-05-替换空格-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="三、替换空格剑指 Offer 05. 替换空格 - 力扣（LeetCode） (leetcode-cn.com)"></a>三、替换空格<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/">剑指 Offer 05. 替换空格 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>解题：根据提示选择双指针法，具体思想：一个指针先指向串本身末尾，另一个指针指向扩充后串位置，从后往前根据第一个指针内容进行数据填充。</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    string replaceSpace(string s) &#123;
+        int p1 = s.size() - 1;
+        int n = 0;
+        for(int i = 0; i &lt; s.size(); i++)&#123;
+            if(s[i] == &#39; &#39;)n++;
+        &#125;
+        int p2 = s.size() + n*2 - 1;
+        s.resize(p2+1);
+        while(p1 != p2)&#123;
+            if(s[p1] == &#39; &#39;)&#123;
+                s[p2] = &#39;0&#39;;
+                p2--;
+                s[p2] = &#39;2&#39;;
+                p2--;
+                s[p2] = &#39;%&#39;;
+                p2--;
+                p1--;
+            &#125;
+            else&#123;
+                s[p2] = s[p1];
+                p2--;
+                p1--;
+            &#125;
+        &#125;
+        return s;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="四、翻转字符串里的单词151-颠倒字符串中的单词-力扣（LeetCode）-leetcode-cn-com"><a href="#四、翻转字符串里的单词151-颠倒字符串中的单词-力扣（LeetCode）-leetcode-cn-com" class="headerlink" title="四、翻转字符串里的单词151. 颠倒字符串中的单词 - 力扣（LeetCode） (leetcode-cn.com)"></a>四、翻转字符串里的单词<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-words-in-a-string/">151. 颠倒字符串中的单词 - 力扣（LeetCode） (leetcode-cn.com)</a></h3><p>1.使用split分割字符串后颠倒相加（c++没有split库函数，需要自己编写）</p>
+<p>2.思路：</p>
+<ul>
+<li><p>移除多余空格</p>
+<p>双指针，快指针在前当快指针所指（为空格且前一位也为空格时）跳过当次循环，否则将快指针位置元素给慢指针位置。注意：要特别去除前后多余空格。</p>
+</li>
+<li><p>将整个字符串反转</p>
+</li>
+<li><p>将每个单词反转</p>
+<p>随想录提供的代码：</p>
+</li>
+</ul>
+<pre><code class="c++">class Solution &#123;
+public:
+    // 反转字符串s中左闭又闭的区间[start, end]
+    void reverse(string&amp; s, int start, int end) &#123;
+        for (int i = start, j = end; i &lt; j; i++, j--) &#123;
+            swap(s[i], s[j]);
+        &#125;
+    &#125;
+
+    // 移除冗余空格：使用双指针（快慢指针法）O(n)的算法
+    void removeExtraSpaces(string&amp; s) &#123;
+        int slowIndex = 0, fastIndex = 0; // 定义快指针，慢指针
+        // 去掉字符串前面的空格
+        while (s.size() &gt; 0 &amp;&amp; fastIndex &lt; s.size() &amp;&amp; s[fastIndex] == &#39; &#39;) &#123;
+            fastIndex++;
+        &#125;
+        for (; fastIndex &lt; s.size(); fastIndex++) &#123;
+            // 去掉字符串中间部分的冗余空格
+            if (fastIndex - 1 &gt; 0
+                    &amp;&amp; s[fastIndex - 1] == s[fastIndex]
+                    &amp;&amp; s[fastIndex] == &#39; &#39;) &#123;
+                continue;
+            &#125; else &#123;
+                s[slowIndex++] = s[fastIndex];
+            &#125;
+        &#125;
+        if (slowIndex - 1 &gt; 0 &amp;&amp; s[slowIndex - 1] == &#39; &#39;) &#123; // 去掉字符串末尾的空格
+            s.resize(slowIndex - 1);
+        &#125; else &#123;
+            s.resize(slowIndex); // 重新设置字符串大小
+        &#125;
+    &#125;
+
+    string reverseWords(string s) &#123;
+        removeExtraSpaces(s); // 去掉冗余空格
+        reverse(s, 0, s.size() - 1); // 将字符串全部反转
+        int start = 0; // 反转的单词在字符串里起始位置
+        int end = 0; // 反转的单词在字符串里终止位置
+        bool entry = false; // 标记枚举字符串的过程中是否已经进入了单词区间
+        for (int i = 0; i &lt; s.size(); i++) &#123; // 开始反转单词
+            if (!entry) &#123;
+                start = i; // 确定单词起始位置
+                entry = true; // 进入单词区间
+            &#125;
+            // 单词后面有空格的情况，空格就是分词符
+            if (entry &amp;&amp; s[i] == &#39; &#39; &amp;&amp; s[i - 1] != &#39; &#39;) &#123;
+                end = i - 1; // 确定单词终止位置
+                entry = false; // 结束单词区间
+                reverse(s, start, end);
+            &#125;
+            // 最后一个结尾单词之后没有空格的情况
+            if (entry &amp;&amp; (i == (s.size() - 1)) &amp;&amp; s[i] != &#39; &#39; ) &#123;
+                end = i;// 确定单词终止位置
+                entry = false; // 结束单词区间
+                reverse(s, start, end);
+            &#125;
+        &#125;
+        return s;
+    &#125;
+&#125;;
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latesthttps://www.paypal.me/staythere"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                leetcode修炼笔记（三）哈希表</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "X74dFY8DNLLKijk3I9cPcReI-gzGzoHsz",
+        appKey: "vXQsbwEWS7soC6Tch78aw4Wv",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-  <div class="post-thumb">
-    <a href="/2022/05/04/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/04.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-5-4 15:05</div>
-      <a href="/2022/05/04/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="post-title">
-        <h3>leetcode修炼笔记（四）字符串</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/05/04/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/akuya.jpg" itemprop="image" alt="PYF" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">PYF</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%93%88%E5%B8%8C%E8%A1%A8/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-28 15:04</div>
-      <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%93%88%E5%B8%8C%E8%A1%A8/" class="post-title">
-        <h3>leetcode修炼笔记（三）哈希表</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%93%88%E5%B8%8C%E8%A1%A8/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E9%93%BE%E8%A1%A8/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/02.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-21 09:04</div>
-      <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E9%93%BE%E8%A1%A8/" class="post-title">
-        <h3>leetcode修炼笔记（二）链表</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E9%93%BE%E8%A1%A8/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B0%E7%BB%84/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/01.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-4-18 19:04</div>
-      <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B0%E7%BB%84/" class="post-title">
-        <h3>leetcode修炼笔记（一）数组</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/%E5%88%B7%E9%A2%98/">刷题<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/04/18/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B0%E7%BB%84/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!--  -->
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>小小勇士</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
