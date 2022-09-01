@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">leetcode修炼笔记（三）哈希表 | MY_BLOG</title>
+  <title itemprop="name">leetcode修炼笔记（八）回溯算法 | MY_BLOG</title>
   
     <link rel="shortcut icon" href="/pic/akuya.jpg">
   
@@ -389,11 +389,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/03.jpg">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/08.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/08.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      leetcode修炼笔记（三）哈希表</h1>
+      leetcode修炼笔记（八）回溯算法</h1>
       <p class="entry-census">
         <span>
           <a href="">
@@ -405,7 +405,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2022-4-28<span class="bull">
+        2022-6-21<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -419,399 +419,478 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="题三：哈希表"><a href="#题三：哈希表" class="headerlink" title="题三：哈希表"></a>题三：哈希表</h1><p>leading:代码随想录 <a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
-<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><p><strong>1.哈希表用来快速判断一个元素是否出现在集合里（牺牲了空间换取了时间）</strong></p>
-<p>2.哈希碰撞解决方法：</p>
-<p>​    (1). 拉链法：每个索引位置都是一个链表</p>
-<p>​    (2). 线性探测法：当前位置有值就依次向下递推</p>
-<p>3.三种哈希结构：</p>
-<p>​    (1). 数组</p>
-<p>​    (2). set（集合）</p>
-<table>
-<thead>
-<tr>
-<th align="left">集合</th>
-<th>底层实现</th>
-<th>是否有序</th>
-<th>数值是否可以重复</th>
-<th>能否更改数值</th>
-<th>查询效率</th>
-<th>增删效率</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">std::set</td>
-<td>红黑树</td>
-<td>有序</td>
-<td>否</td>
-<td>否</td>
-<td>O(log n)</td>
-<td>O(log n)</td>
-</tr>
-<tr>
-<td align="left">std::multiset</td>
-<td>红黑树</td>
-<td>有序</td>
-<td>是</td>
-<td>否</td>
-<td>O(log n)</td>
-<td>O(log n)</td>
-</tr>
-<tr>
-<td align="left">std::unordered_set</td>
-<td>哈希表</td>
-<td>无序</td>
-<td>否</td>
-<td>否</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-</tbody></table>
-<p>std::unordered_set底层实现为哈希表，std::set 和std::multiset 的底层实现是红黑树，红黑树是一种平衡二叉搜索树，所以key值是有序的，但key不可以修改，改动key值会导致整棵树的错乱，所以只能删除和增加。</p>
-<p>​    (3). map（映射）</p>
-<table>
-<thead>
-<tr>
-<th>映射</th>
-<th>底层实现</th>
-<th>是否有序</th>
-<th>数值是否可以重复</th>
-<th>能否更改数值</th>
-<th>查询效率</th>
-<th>增删效率</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>std::map</td>
-<td>红黑树</td>
-<td>key有序</td>
-<td>key不可重复</td>
-<td>key不可修改</td>
-<td>O(logn)</td>
-<td>O(logn)</td>
-</tr>
-<tr>
-<td>std::multimap</td>
-<td>红黑树</td>
-<td>key有序</td>
-<td>key可重复</td>
-<td>key不可修改</td>
-<td>O(log n)</td>
-<td>O(log n)</td>
-</tr>
-<tr>
-<td>std::unordered_map</td>
-<td>哈希表</td>
-<td>key无序</td>
-<td>key不可重复</td>
-<td>key不可修改</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-</tbody></table>
-<p><strong>std::map 和std::multimap 的key也是有序的，因为底层实现是红黑树（这个问题也经常作为面试题，考察对语言容器底层的理解）。</strong></p>
-<p>当我们要使用集合来解决哈希问题的时候，优先使用unordered_set，因为<strong>它的查询和增删效率是最优的</strong>，如果需要集合是有序的，那么就用set，如果要求不仅有序还要有重复数据的话，那么就用multiset。</p>
-<p>虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，我们依然称之为哈希法。 map也是一样的道理。</p>
-<p><strong>unordered_set在C++11的时候被引入标准库了，而hash_set并没有</strong>，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C++11标准之前民间高手自发造的轮子。</p>
-<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><h3 id="一、242-有效的字母异位词"><a href="#一、242-有效的字母异位词" class="headerlink" title="一、242. 有效的字母异位词"></a>一、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">242. 有效的字母异位词</a></h3><p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</p>
-<p>注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。</p>
-<p>示例 1:</p>
-<p>​    输入: s &#x3D; “anagram”, t &#x3D; “nagaram”<br>​    输出: true<br>示例 2:</p>
-<p>​    输入: s &#x3D; “rat”, t &#x3D; “car”<br>​    输出: false</p>
-<p>思路：创建取值数组，建立哈希表表示字母出现次数，依次遍历两个串，先加后减，若哈希表全为0则输出true</p>
+          <h1 id="题八：回溯算法"><a href="#题八：回溯算法" class="headerlink" title="题八：回溯算法"></a>题八：回溯算法</h1><p>leading:代码随想录  <a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
+<p><img src="E:\Gitblog\source_posts\图片\回溯算法.png" alt="回溯算法"></p>
+<h2 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h2><h3 id="什么是回溯法"><a href="#什么是回溯法" class="headerlink" title="什么是回溯法"></a>什么是回溯法</h3><p>回溯法也可以叫做回溯搜索法，它是一种<strong>搜索的方式</strong></p>
+<p>回溯是递归的副产品，只要有递归就会有回溯。</p>
+<p>· <strong>回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案</strong></p>
+<h3 id="回溯法解决的问题"><a href="#回溯法解决的问题" class="headerlink" title="回溯法解决的问题"></a>回溯法解决的问题</h3><p>回溯法，一般可以解决如下几种问题：</p>
+<ul>
+<li>组合问题：N个数里面按一定规则找出k个数的集合（组合无序，排列有序）</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
+<li>棋盘问题：N皇后，解数独等等</li>
+</ul>
+<h3 id="理解回溯法"><a href="#理解回溯法" class="headerlink" title="理解回溯法"></a>理解回溯法</h3><p><strong>回溯法解决的问题都可以抽象为树形结构</strong></p>
+<p>因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong></p>
+<h3 id="回溯法模板"><a href="#回溯法模板" class="headerlink" title="回溯法模板"></a>回溯法模板</h3><pre><code class="c++">void backtracking(参数) &#123;
+    if (终止条件) &#123;
+        存放结果;
+        return;
+    &#125;
+
+    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;
+        处理节点;
+        backtracking(路径，选择列表); // 递归
+        回溯，撤销处理结果
+    &#125;
+&#125;
+</code></pre>
+<h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><h3 id="1-组合"><a href="#1-组合" class="headerlink" title="1.组合"></a>1.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/">组合</a></h3><p>· 题目</p>
+<p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
+<p>示例:<br>输入: n &#x3D; 4, k &#x3D; 2<br>输出:<br>[<br>[2,4],<br>[3,4],<br>[2,3],<br>[1,2],<br>[1,3],<br>[1,4],<br>]</p>
+<p>· 解答</p>
 <pre><code class="c++">class Solution &#123;
 public:
-    bool isAnagram(string s, string t) &#123;
-        int record[26] = &#123;0&#125;;
-        for(int i = 0 ; i &lt; s.size() ; i++)&#123;
-            record[s[i]-&#39;a&#39;]+=1;
+    vector&lt;vector&lt;int&gt;&gt; result;//存最终结果
+    vector&lt;int&gt; path;//存一次递归返回结果
+    void test(int n, int k, int startnum)&#123;
+        if(path.size() == k)&#123;
+            result.push_back(path);
+            return;
         &#125;
-        for(int i = 0 ; i &lt; t.size() ; i++)&#123;
-            record[t[i]-&#39;a&#39;]-=1;
+        for(int i = startnum; i &lt;= n; i++)&#123;
+            path.push_back(i);
+            test(n,k,i+1);
+            path.pop_back();
         &#125;
-        for(int i = 0 ; i &lt; 26 ; i++)&#123;
-            if(record[i] != 0)return false;
+    &#125;
+
+    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) &#123;
+        test(n,k,1);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<p>· 优化：</p>
+<ol>
+<li>已经选择的元素个数：path.size();</li>
+<li>还需要的元素个数为: k - path.size();</li>
+<li>在集合n中至多要从该起始位置 : n - (k - path.size()) + 1，开始遍历</li>
+</ol>
+<p>如：n&#x3D;4，k&#x3D;3，则至多可以从2开始计数</p>
+<pre><code class="c++">class Solution &#123;
+private:
+    vector&lt;vector&lt;int&gt;&gt; result;
+    vector&lt;int&gt; path;
+    void backtracking(int n, int k, int startIndex) &#123;
+        if (path.size() == k) &#123;
+            result.push_back(path);
+            return;
+        &#125;
+        for (int i = startIndex; i &lt;= n - (k - path.size()) + 1; i++) &#123; // 优化的地方
+            path.push_back(i); // 处理节点
+            backtracking(n, k, i + 1);
+            path.pop_back(); // 回溯，撤销处理的节点
+        &#125;
+    &#125;
+public:
+
+    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) &#123;
+        backtracking(n, k, 1);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="2-组合总和-III"><a href="#2-组合总和-III" class="headerlink" title="2.组合总和 III"></a>2.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">组合总和 III</a></h3><p>找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。</p>
+<p>说明：</p>
+<ul>
+<li>所有数字都是正整数。</li>
+<li>解集不能包含重复的组合。</li>
+</ul>
+<p>示例 1: 输入: k &#x3D; 3, n &#x3D; 7 输出: [[1,2,4]]</p>
+<p>示例 2: 输入: k &#x3D; 3, n &#x3D; 9 输出: [[1,2,6], [1,3,5], [2,3,4]]</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; result;  //总结果
+    vector&lt;int&gt; onetime;  //一次递归结果
+    void backtracking(int k, int n, int beginnum)&#123;
+        if(onetime.size() &gt; k)&#123;
+            return;
+        &#125;
+        if(accumulate(onetime.begin(),onetime.end(),0) == n &amp;&amp; onetime.size() == k)&#123;
+            result.push_back(onetime);
+            return;
+        &#125;
+        for(int i = beginnum; i &lt;= 9; i++)&#123;
+            onetime.push_back(i);
+            backtracking(k,n,i+1);
+            onetime.pop_back();
+        &#125;
+    &#125;
+
+    vector&lt;vector&lt;int&gt;&gt; combinationSum3(int k, int n) &#123;
+        backtracking(k,n,1);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="3-电话号码的字母组合"><a href="#3-电话号码的字母组合" class="headerlink" title="3.电话号码的字母组合"></a>3.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">电话号码的字母组合</a></h3><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020102916424043.png" alt="17.电话号码的字母组合"></p>
+<p>示例: 输入：”23” 输出：[“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</p>
+<p>说明：尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。</p>
+<pre><code class="c++">class Solution &#123;
+private:
+    const string letterMap[10] = &#123;
+        &quot;&quot;, // 0
+        &quot;&quot;, // 1
+        &quot;abc&quot;, // 2
+        &quot;def&quot;, // 3
+        &quot;ghi&quot;, // 4
+        &quot;jkl&quot;, // 5
+        &quot;mno&quot;, // 6
+        &quot;pqrs&quot;, // 7
+        &quot;tuv&quot;, // 8
+        &quot;wxyz&quot;, // 9
+    &#125;;
+public:
+    vector&lt;string&gt; result;
+    string s;
+    void backtracking(const string&amp; digits, int index) &#123;
+        if (index == digits.size()) &#123;
+            result.push_back(s);
+            return;
+        &#125;
+        int digit = digits[index] - &#39;0&#39;;        // 将index指向的数字转为int
+        string letters = letterMap[digit];      // 取数字对应的字符集
+        for (int i = 0; i &lt; letters.size(); i++) &#123;
+            s.push_back(letters[i]);            // 处理
+            backtracking(digits, index + 1);    // 递归，注意index+1，一下层要处理下一个数字了
+            s.pop_back();                       // 回溯
+        &#125;
+    &#125;
+    vector&lt;string&gt; letterCombinations(string digits) &#123;
+        s.clear();
+        result.clear();
+        if (digits.size() == 0) &#123;
+            return result;
+        &#125;
+        backtracking(digits, 0);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="4-组合总和"><a href="#4-组合总和" class="headerlink" title="4.组合总和"></a>4.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">组合总和</a></h3><p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：</p>
+<ul>
+<li>所有数字（包括 target）都是正整数。</li>
+<li>解集不能包含重复的组合。</li>
+</ul>
+<p>示例 1： 输入：candidates &#x3D; [2,3,6,7], target &#x3D; 7, 所求解集为： [ [7], [2,2,3] ]</p>
+<p>示例 2： 输入：candidates &#x3D; [2,3,5], target &#x3D; 8, 所求解集为： [  [2,2,2,2],  [2,3,3],  [3,5] ]</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; result;
+    vector&lt;int&gt; onetime;
+    void backtracing(vector&lt;int&gt;&amp; candidates, int target, int begin)&#123;
+        int sum = accumulate(onetime.begin(), onetime.end(), 0);
+        if(sum &gt; target) return;
+        if(sum == target)&#123;
+            result.push_back(onetime);
+            return;
+        &#125;
+        for(int i = begin; i &lt; candidates.size(); i++)&#123;
+            onetime.push_back(candidates[i]);
+            backtracing(candidates, target, i);
+            onetime.pop_back();
+        &#125;
+    &#125; 
+    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candidates, int target) &#123;
+        result.clear();
+        onetime.clear();
+        backtracing(candidates, target, 0);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="5-组合总和-II（去重复）"><a href="#5-组合总和-II（去重复）" class="headerlink" title="5. 组合总和 II（去重复）"></a>5.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/"> 组合总和 II</a>（去重复）</h3><p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明： 所有数字（包括目标数）都是正整数。 解集不能包含重复的组合。</p>
+<p>示例 1: 输入: candidates &#x3D; [10,1,2,7,6,1,5], target &#x3D; 8, 所求解集为: [ [1, 7], [1, 2, 5], [2, 6], [1, 1, 6] ]</p>
+<p>示例 2: 输入: candidates &#x3D; [2,5,2,1,2], target &#x3D; 5, 所求解集为: [  [1,2,2],  [5] ]</p>
+<p><strong>注：所有组合求出来，再用set或者map去重，这么做很容易超时！</strong></p>
+<pre><code class="cpp">sort(candidates.begin(), candidates.end()); //排序
+</code></pre>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; result;
+    vector&lt;int&gt; onetime;
+    
+    void backtracing(vector&lt;int&gt;&amp; candidates, int target, int begin)&#123;
+        int sum = accumulate(onetime.begin(), onetime.end(), 0);
+        if(sum &gt; target) return;
+        if(sum == target)&#123;
+            result.push_back(onetime);
+            return;
+        &#125;
+        for(int i = begin; i &lt; candidates.size(); i++)&#123;
+            if (i &gt; begin &amp;&amp; candidates[i] == candidates[i - 1]) &#123;
+                continue;
+            &#125;
+            onetime.push_back(candidates[i]);
+            backtracing(candidates, target, i+1);
+            onetime.pop_back();
+        &#125;
+    &#125; 
+    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) &#123;
+        result.clear();
+        onetime.clear();
+        sort(candidates.begin(),candidates.end());
+        backtracing(candidates, target, 0);
+        return result;
+    &#125;
+&#125;;
+</code></pre>
+<p>if (i &gt; begin &amp;&amp; candidates[i] &#x3D;&#x3D; candidates[i - 1])</p>
+<p>解释：对同一层使用相同的元素（上次）进行去除</p>
+<p><strong>只有重复元素的第一个可以选择多个重复</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201123202817973.png" alt="40.组合总和II1"></p>
+<h3 id="6-131-分割回文串"><a href="#6-131-分割回文串" class="headerlink" title="6.131. 分割回文串"></a>6.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">131. 分割回文串</a></h3><p>给你一个字符串 <code>s</code>，请你将 <code>s</code> 分割成一些子串，使每个子串都是 <strong>回文串</strong> 。返回 <code>s</code> 所有可能的分割方案。</p>
+<p><strong>回文串</strong> 是正着读和反着读都一样的字符串。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：s = &quot;aab&quot;
+输出：[[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;],[&quot;aa&quot;,&quot;b&quot;]]
+</code></pre>
+<p><strong>示例 2：</strong></p>
+<pre><code>输入：s = &quot;a&quot;
+输出：[[&quot;a&quot;]]
+</code></pre>
+<p>思路：有一个函数是来分辨string是否是回文的。</p>
+<p>回溯时循环的是每次分割的大小，当该次分割的是回文时放入结果中，递归下一轮分割的位置（从1开始）</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;string&gt;&gt; res;
+    bool isPal(const string s,int start, int end)
+    &#123;
+        for(int i = start,j = end; i &lt; j; i++,j--)
+        &#123;
+            if(s[i] != s[j])return false;
         &#125;
         return true;
     &#125;
-&#125;;
-</code></pre>
-<h3 id="二、349-两个数组的交集"><a href="#二、349-两个数组的交集" class="headerlink" title="二、349. 两个数组的交集"></a>二、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. 两个数组的交集</a></a></h3><p>给定两个数组 <code>nums1</code> 和 <code>nums2</code> ，返回 <em>它们的交集</em> 。输出结果中的每个元素一定是 <strong>唯一</strong> 的。我们可以 <strong>不考虑输出结果的顺序</strong> 。</p>
-<p>示例 1：</p>
-<p>​    输入：nums1 &#x3D; [1,2,2,1], nums2 &#x3D; [2,2]<br>​    输出：[2]<br>示例 2：</p>
-<p>​    输入：nums1 &#x3D; [4,9,5], nums2 &#x3D; [9,4,9,8,4]<br>​    输出：[9,4]<br>​    解释：[4,9] 也是可通过的</p>
-<p>用法：</p>
-<pre><code>创建vector元素：
-vector&lt;int&gt; a;
 
-vector元素的大小：
-a.size()
-
-数组元素的大小：
-sizeof(a)/sizeof(int)
-
-无序集合构建：
-unordered_set&lt;int&gt; result_set;
-result_set.insert(num);
-unordered_set&lt;int&gt; nums_set(nums1.begin(), nums1.end());
-nums_set.find(num)
-
-无序集合转vector数组：
-vector&lt;int&gt;(result_set.begin(), result_set.end());
-</code></pre>
-<p>我的代码：</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;
-        int record[1001] = &#123;0&#125;;
-        for(int i = 0 ; i &lt; nums1.size() ; i++)&#123;
-            if(record[nums1[i]] == 0)record[nums1[i]] = 1;
-        &#125;
-        vector&lt;int&gt; a;
-        for(int i = 0 ; i &lt; nums2.size() ; i++)&#123;
-            if(record[nums2[i]] == 1)record[nums2[i]] = 2;
-        &#125;
-        for(int i = 0 ; i &lt; sizeof(record)/sizeof(int) ; i++)&#123;
-            if(record[i] == 2)a.push_back(i);
-        &#125;
-        return a;
-    &#125;
-&#125;;
-</code></pre>
-<p>他的代码：</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;
-        unordered_set&lt;int&gt; result_set; // 存放结果
-        unordered_set&lt;int&gt; nums_set(nums1.begin(), nums1.end());
-        for (int num : nums2) &#123;
-            // 发现nums2的元素 在nums_set里又出现过
-            if (nums_set.find(num) != nums_set.end()) &#123;
-                result_set.insert(num);
-            &#125;
-        &#125;
-        return vector&lt;int&gt;(result_set.begin(), result_set.end());
-    &#125;
-&#125;;
-</code></pre>
-<h3 id="三、202-快乐数https-leetcode-cn-com-problems-happy-number"><a href="#三、202-快乐数https-leetcode-cn-com-problems-happy-number" class="headerlink" title="三、202. 快乐数https://leetcode-cn.com/problems/happy-number/)"></a>三、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/">202. 快乐数</a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/happy-number/">https://leetcode-cn.com/problems/happy-number/</a>)</h3><p>编写一个算法来判断一个数 n 是不是快乐数。</p>
-<p>「快乐数」 定义为：</p>
-<p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>如果这个过程 结果为 1，那么这个数就是快乐数。<br>如果 n 是 快乐数 就返回 true ；不是，则返回 false 。</p>
-<p>示例 1：</p>
-<p>​    输入：n &#x3D; 19<br>​    输出：true<br>​    解释：<br>​    12 + 92 &#x3D; 82<br>​    82 + 22 &#x3D; 68<br>​    62 + 82 &#x3D; 100<br>​    12 + 02 + 02 &#x3D; 1<br>示例 2：</p>
-<p>​    输入：n &#x3D; 2<br>​    输出：false</p>
-<p>根据随想录上的代码：</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    int getsum(int n)&#123;
-        int sum = 0;
-        while(n)&#123;
-            sum += (n % 10) * (n % 10);
-            n = n / 10;
-        &#125;
-        return sum;
-    &#125;
-
-    bool isHappy(int n) &#123;
-        unordered_set&lt;int&gt; set;
-        while(1)&#123;
-            int sum = getsum(n);
-            if(sum == 1)return true;
-            if(set.find(sum) != set.end())&#123;
-                return false;
-            &#125;else&#123;
-                set.insert(sum);
-            &#125;
-            n = sum;
-        &#125;
-    &#125;
-&#125;;
-</code></pre>
-<p>注意：unordered_set.find()返回的值是一个迭代器(iterator指向目标元素)，没找到会返回end()。</p>
-<pre><code class="c++">unordered_map.insert
-unordered_map.find
-unordered_map.erase
-unordered_map.clear
-unordered_map.count(int)      //返回value出现的次数
-unordered_map.emplace(int)  //插入函数  
-unordered_map.swap(unordered_map)  //交换
-
-unordered_map.empty();  //判断是否为空
-unordered_map.size();      //获取元素个数
-unordered_map.max_size(); //获取最大存储量
-</code></pre>
-<h3 id="四、1-两数之和https-leetcode-cn-com-problems-two-sum"><a href="#四、1-两数之和https-leetcode-cn-com-problems-two-sum" class="headerlink" title="四、1. 两数之和https://leetcode-cn.com/problems/two-sum/)"></a>四、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">https://leetcode-cn.com/problems/two-sum/</a>)</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<p>示例 1：</p>
-<p>​    输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>​    输出：[0,1]<br>​    解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
-<p>​    输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>​    输出：[1,2]<br>示例 3：</p>
-<p>​    输入：nums &#x3D; [3,3], target &#x3D; 6<br>​    输出：[0,1]</p>
-<p>使用map构建哈希表，查询nums中每个元素i，在map中寻找target-i</p>
-<p>（因为需要保存元素值和下标，所以用map）</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;
-        unordered_map&lt;int,int&gt; map;
-        for(int i = 0; i &lt; nums.size(); i++)&#123;
-            auto iter = map.find(target - nums[i]);
-            if(iter != map.end())&#123;
-                return &#123;iter -&gt; second, i&#125;;
-            &#125;
-            map.insert(pair&lt;int,int&gt;(nums[i],i));
-        &#125;
-        return &#123;&#125;;
-    &#125;
-&#125;;
-</code></pre>
-<h3 id="五、454-四数相加-II"><a href="#五、454-四数相加-II" class="headerlink" title="五、454. 四数相加 II"></a>五、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">454. 四数相加 II</a></h3><p>给你四个整数数组 nums1、nums2、nums3 和 nums4 ，数组长度都是 n ，请你计算有多少个元组 (i, j, k, l) 能满足：</p>
-<p>​    0 &lt;&#x3D; i, j, k, l &lt; n<br>​    nums1[i] + nums2[j] + nums3[k] + nums4[l] &#x3D;&#x3D; 0</p>
-<p>示例 1：</p>
-<p>输入：nums1 &#x3D; [1,2], nums2 &#x3D; [-2,-1], nums3 &#x3D; [-1,2], nums4 &#x3D; [0,2]<br>输出：2<br>解释：<br>两个元组如下：</p>
-<ol>
-<li>(0, 0, 0, 1) -&gt; nums1[0] + nums2[0] + nums3[0] + nums4[1] &#x3D; 1 + (-2) + (-1) + 2 &#x3D; 0</li>
-<li>(1, 1, 0, 0) -&gt; nums1[1] + nums2[1] + nums3[0] + nums4[0] &#x3D; 2 + (-1) + (-1) + 0 &#x3D; 0<br>示例 2：</li>
-</ol>
-<p>输入：nums1 &#x3D; [0], nums2 &#x3D; [0], nums3 &#x3D; [0], nums4 &#x3D; [0]<br>输出：1</p>
-<p>思路：</p>
-<ol>
-<li>首先定义 一个unordered_map，key放a和b两数之和，value 放a和b两数之和出现的次数。</li>
-<li>遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中。</li>
-<li>定义int变量count，用来统计 a+b+c+d &#x3D; 0 出现的次数。</li>
-<li>在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就用count把map中key对应的value也就是出现次数统计出来。</li>
-<li>最后返回统计值 count 就可以了</li>
-</ol>
-<p>复杂度：0(N^2)</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    int fourSumCount(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, vector&lt;int&gt;&amp; nums3, vector&lt;int&gt;&amp; nums4) &#123;
-        unordered_map&lt;int, int&gt; map;
-        for(int a : nums1)
+    void backtrace(string s,vector&lt;string&gt;&amp; temp,int startindex)
+    &#123;
+        if(startindex == s.size())
         &#123;
-            for(int b : nums2)
-            &#123;
-                map[a+b]++;
-            &#125;
+            res.push_back(temp);
+            return;
         &#125;
-        int res = 0;
-        for(int c : nums3)
+        for(int i = startindex; i &lt; s.size(); i++)
         &#123;
-            for(int d : nums4)
+            if(isPal(s,startindex,i))
             &#123;
-                if(map.find(0-c-d) != map.end())
-                &#123;
-                    res += map[0-c-d];
-                &#125;
+                string str = s.substr(startindex,i - startindex +1);
+                temp.push_back(str);
             &#125;
+            else
+            &#123;
+                continue;
+            &#125;
+            backtrace(s,temp,i+1);
+            temp.pop_back();
         &#125;
+    &#125;
+
+    vector&lt;vector&lt;string&gt;&gt; partition(string s) &#123;
+        vector&lt;string&gt; temp;
+        backtrace(s,temp,0);
         return res;
     &#125;
 &#125;;
 </code></pre>
-<h3 id="六、383-赎金信"><a href="#六、383-赎金信" class="headerlink" title="六、383. 赎金信"></a>六、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">383. 赎金信</a></h3><p>给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。</p>
-<p>如果可以，返回 true ；否则返回 false 。</p>
-<p>magazine 中的每个字符只能在 ransomNote 中使用一次。</p>
+<h3 id="7-93-复原-IP-地址"><a href="#7-93-复原-IP-地址" class="headerlink" title="7.93. 复原 IP 地址"></a>7.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">93. 复原 IP 地址</a></h3><p>有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “<a href="mailto:&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#x40;&#x31;&#46;&#x31;">&#49;&#57;&#x32;&#46;&#49;&#54;&#56;&#x40;&#x31;&#46;&#x31;</a>“ 是 无效 IP 地址。<br>给定一个只包含数字的字符串 s ，用以表示一个 IP 地址，返回所有可能的有效 IP 地址，这些地址可以通过在 s 中插入 ‘.’ 来形成。你 不能 重新排序或删除 s 中的任何数字。你可以按 任何 顺序返回答案。</p>
 <p>示例 1：</p>
-<p>​    输入：ransomNote &#x3D; “a”, magazine &#x3D; “b”<br>​    输出：false<br>示例 2：</p>
-<p>​    输入：ransomNote &#x3D; “aa”, magazine &#x3D; “ab”<br>​    输出：false<br>示例 3：</p>
-<p>​    输入：ransomNote &#x3D; “aa”, magazine &#x3D; “aab”<br>​    输出：true</p>
+<p>​    输入：s &#x3D; “25525511135”<br>​    输出：[“255.255.11.135”,”255.255.111.35”]<br>示例 2：</p>
+<p>​    输入：s &#x3D; “0000”<br>​    输出：[“0.0.0.0”]<br>示例 3：</p>
+<p>​    输入：s &#x3D; “101023”<br>​    输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</p>
+<p>思路：对字符串从开始到结尾进行分割，分割时判断分割的字符是否合法，合法进行递归下一次分割，当分割数（深度&#x3D;3）时判断最后的串是否合法，合法就存然后返回。</p>
 <pre><code class="c++">class Solution &#123;
 public:
-    bool canConstruct(string ransomNote, string magazine) &#123;
-        unordered_map&lt;char, int&gt; map;
-        for(int i = 0; i &lt; magazine.size(); i++)
+    vector&lt;string&gt; res;
+    bool isvalued(string&amp; s, int startindex, int end)//判断start-end间字符是否符合规范
+    &#123;
+        int num = 0;
+        for(int i = startindex ;i &lt;= end;i++)
         &#123;
-            map[magazine[i]]++;
+            num = num*10+(s[i] - &#39;0&#39;);
         &#125;
-        for(int i = 0; i &lt; ransomNote.size(); i++)
-        &#123;
-            if(map.find(ransomNote[i]) == map.end() || map[ransomNote[i]] == 0)
-            &#123;
-                return false;
-            &#125;
-            map[ransomNote[i]]--;
-        &#125;
+        if(end - startindex &gt;= 3 || startindex &gt;= s.size())return false;
+        else if(s[startindex] == &#39;0&#39; &amp;&amp; startindex != end) return false;
+        else if(num &gt; 255)return false;
         return true;
     &#125;
-&#125;;
-</code></pre>
-<h3 id="七、15-三数之和"><a href="#七、15-三数之和" class="headerlink" title="七、15. 三数之和"></a>七、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 三数之和</a></h3><p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c &#x3D; 0 ？请你找出所有和为 0 且不重复的三元组。</p>
-<p>注意：答案中不可以包含重复的三元组。</p>
-<p>示例 1：</p>
-<p>输入：nums &#x3D; [-1,0,1,2,-1,-4]<br>输出：[[-1,-1,2],[-1,0,1]]<br>示例 2：</p>
-<p>输入：nums &#x3D; [0,1,1]<br>输出：[]<br>示例 3：</p>
-<p>输入：nums &#x3D; [0,0,0]<br>输出：[[0,0,0]]</p>
-<p>双指针法：</p>
-<pre><code class="c++">class Solution &#123;
-public:
-    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) &#123;
-        sort(nums.begin(), nums.end());
-        vector&lt;vector&lt;int&gt;&gt; res;
-        for(int i = 0; i &lt; nums.size() - 2; i++)
+
+    void backtrace(string&amp; s, int startindex, int depth)
+    &#123;
+        if(depth == 3)
         &#123;
-            if(nums[i] &gt; 0) return res;
-            if(i &gt; 0 &amp;&amp; nums[i] == nums[i-1])continue;
-            int left = i+1;
-            int right = nums.size()-1;
-            int c = 0 - nums[i];
-            while(left &lt; right)
+            if(isvalued(s,startindex,s.size()-1))
             &#123;
-                if(nums[left] &gt; c)break;
-                else if(nums[left]+nums[right] == c)
-                &#123;
-                    res.push_back(vector&lt;int&gt;&#123;nums[left],nums[right],nums[i]&#125;);
-                    //找到一个同时收缩
-                    left++;
-                    right--;
-                    while(left &lt; right &amp;&amp; nums[right] == nums[right+1])right--;
-                    while(left &lt; right &amp;&amp; nums[left] == nums[left - 1])left++;
-                &#125;
-                else if(nums[left]+nums[right] &gt; c)right--;
-                else if(nums[left]+nums[right] &lt; c)left++;
+                res.push_back(s);
             &#125;
+            return;
         &#125;
+        for(int i = startindex; i &lt; s.size(); i++)
+        &#123;
+            if(isvalued(s,startindex,i))
+            &#123;
+                s.insert(s.begin()+i+1,&#39;.&#39;);
+                depth++;
+                backtrace(s,i+2,depth);
+                depth--;
+                s.erase(s.begin()+i+1);
+            &#125;
+            else break;
+        &#125;
+    &#125;
+    vector&lt;string&gt; restoreIpAddresses(string s) &#123;
+        res.clear();
+        if(s.size() &lt; 4 || s.size() &gt; 12)return res;
+        backtrace(s,0,0);
         return res;
     &#125;
 &#125;;
 </code></pre>
-<h3 id="八、18-四数之和"><a href="#八、18-四数之和" class="headerlink" title="八、18. 四数之和"></a>八、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">18. 四数之和</a></h3><p>给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为两个四元组重复）：</p>
-<p>0 &lt;&#x3D; a, b, c, d &lt; n<br>a、b、c 和 d 互不相同<br>nums[a] + nums[b] + nums[c] + nums[d] &#x3D;&#x3D; target<br>你可以按 任意顺序 返回答案 。</p>
+<h3 id="8-78-子集"><a href="#8-78-子集" class="headerlink" title="8.78. 子集"></a>8.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">78. 子集</a></h3><p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
 <p>示例 1：</p>
-<p>​    输入：nums &#x3D; [1,0,-1,0,-2,2], target &#x3D; 0<br>​    输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]<br>示例 2：</p>
-<p>​    输入：nums &#x3D; [2,2,2,2,2], target &#x3D; 8<br>​    输出：[[2,2,2,2]]</p>
+<p>​    输入：nums &#x3D; [1,2,3]<br>​    输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]<br>示例 2：</p>
+<p>​    输入：nums &#x3D; [0]<br>​    输出：[[],[0]]</p>
 <pre><code class="c++">class Solution &#123;
 public:
-    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target) &#123;
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;int&gt; path;
+    void backtrace(vector&lt;int&gt;&amp; nums, int startindex, int depth)
+    &#123;
+        res.push_back(path);
+        for(int i = startindex; i &lt; nums.size(); i++)
+        &#123;
+            path.push_back(nums[i]);
+            backtrace(nums,i+1,depth+1);
+            path.pop_back();
+        &#125;
+        return;
+    &#125;
+    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) &#123;
+        res.clear();
+        path.clear();
+        backtrace(nums,0,0);
+        return res;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="9-90-子集-II"><a href="#9-90-子集-II" class="headerlink" title="9.90. 子集 II"></a>9.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/">90. 子集 II</a></h3><p>给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。</p>
+<p>解集 不能 包含重复的子集。返回的解集中，子集可以按 任意顺序 排列。</p>
+<p>示例 1：</p>
+<p>​    输入：nums &#x3D; [1,2,2]<br>​    输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]<br>示例 2：</p>
+<p>​    输入：nums &#x3D; [0]<br>​    输出：[[],[0]]</p>
+<p>思路：跟《子集》基本没差，区别就是个去重，数组中遇到的一样</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;int&gt; path;
+    void backtrace(vector&lt;int&gt;&amp; nums, int startindex)
+    &#123;
+        res.push_back(path);
+        for(int i = startindex; i &lt; nums.size(); i++)
+        &#123;
+            path.push_back(nums[i]);
+            backtrace(nums,i+1);
+            path.pop_back();
+            while(i &lt; nums.size()-1 &amp;&amp; nums[i] == nums[i+1])i++;
+        &#125;
+        return;
+    &#125;
+    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) &#123;
+        res.clear();
+        path.clear();
         sort(nums.begin(),nums.end());
-        vector&lt;vector&lt;int&gt;&gt; res;
-        if(nums.size() &lt; 4) return res;
-        for(int i = 0; i &lt; nums.size()-3; i++)
+        backtrace(nums,0);
+        return res;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="10-491-递增子序列"><a href="#10-491-递增子序列" class="headerlink" title="10.491. 递增子序列"></a>10.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/increasing-subsequences/">491. 递增子序列</a></h3><p>给你一个整数数组 nums ，找出并返回所有该数组中不同的递增子序列，递增子序列中 至少有两个元素 。你可以按 任意顺序 返回答案。</p>
+<p>数组中可能含有重复元素，如出现两个整数相等，也可以视作递增序列的一种特殊情况。</p>
+<p>示例 1：</p>
+<p>​    输入：nums &#x3D; [4,6,7,7]<br>​    输出：[[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]<br>示例 2：</p>
+<p>​    输入：nums &#x3D; [4,4,3,2,1]<br>​    输出：[[4,4]]</p>
+<p>注意:用unorder_set能防止同一层中相同元素的重复使用</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;int&gt; path;
+    void backtrace(vector&lt;int&gt;&amp; nums,int startindex)
+    &#123;
+        if(path.size() &gt;= 2)res.push_back(path);
+        unordered_set&lt;int&gt; used;    //同层去重
+        for(int i = startindex; i &lt; nums.size(); i++)
         &#123;
-            if(nums[i] &gt;= 0 &amp;&amp; nums[i] &gt; target &amp;&amp; target &gt;= 0) break;
-            if(i &gt; 0 &amp;&amp; nums[i] == nums[i-1])continue;
-            for(int j = i + 1; j &lt; nums.size()-2; j++)
-            &#123;
-                if (nums[i] + nums[j] &gt; target &amp;&amp; nums[i] + nums[j] &gt;= 0 &amp;&amp; target &gt;= 0) &#123;
-                    break;
-                &#125;
-                if(j &gt; i + 1 &amp;&amp; nums[j] == nums[j-1])continue;
-                int left = j + 1;
-                int right = nums.size() - 1;
-                while(left &lt; right)
-                &#123;
-                    if((long)nums[i] + nums[j] + nums[left] + nums[right] &gt; target)right--;
-                    else if((long)nums[i] + nums[j] + nums[left] + nums[right] &lt; target)left++;
-                    else if((long)nums[i] + nums[j] + nums[left] + nums[right] == target)
-                    &#123;
-                        res.push_back(vector&lt;int&gt;&#123;nums[i], nums[j], nums[left], nums[right]&#125;);
-                        left++;
-                        right--;
-                        while(left &lt; right &amp;&amp; nums[left] == nums[left-1])left++;
-                        while(left &lt; right &amp;&amp; nums[right] == nums[right+1])right--;
-                    &#125;
-                &#125;
-            &#125;
+            path.push_back(nums[i]);
+            //（当path长度为1 或 后一个数要大于等于path的前一个数）且 当前放入的值在该层还未被使用过
+            if((path.size() == 1 || nums[i] &gt;= path[path.size()-2]) &amp;&amp;
+             used.find(nums[i]) == used.end())backtrace(nums,i+1);
+            path.pop_back();
+            used.insert(nums[i]);
+            while(i &lt; nums.size()-1 &amp;&amp; nums[i] == nums[i+1])i++;
         &#125;
+        return;
+    &#125;
+    vector&lt;vector&lt;int&gt;&gt; findSubsequences(vector&lt;int&gt;&amp; nums) &#123;
+        res.clear();
+        path.clear();
+        backtrace(nums,0);
+        return res;
+    &#125;
+&#125;;
+</code></pre>
+<h3 id="11-46-全排列"><a href="#11-46-全排列" class="headerlink" title="11.46. 全排列"></a>11.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">46. 全排列</a></h3><p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <em>所有可能的全排列</em> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
+<p>示例 1：</p>
+<p>​    输入：nums &#x3D; [1,2,3]<br>​    输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]<br>示例 2：</p>
+<p>​    输入：nums &#x3D; [0,1]<br>​    输出：[[0,1],[1,0]]<br>示例 3：</p>
+<p>​    输入：nums &#x3D; [1]<br>​    输出：[[1]]</p>
+<p>注意：已经用过的数就不能再用了，所以用unordered_set来记录一个用过的表，这个表也加入回溯。</p>
+<pre><code class="c++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;int&gt; path;
+    unordered_set&lt;int&gt; used;
+    void backtrace(vector&lt;int&gt;&amp; nums)&#123;
+        if(path.size() == nums.size())
+        &#123;
+            res.push_back(path);
+            return;
+        &#125;
+        
+        for(int i = 0; i &lt; nums.size(); i++)
+        &#123;
+            if(used.find(nums[i]) != used.end())continue;
+            used.insert(nums[i]);
+            path.push_back(nums[i]);
+            backtrace(nums);
+            path.pop_back();
+            used.erase(nums[i]);
+        &#125;
+    &#125;
+    vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt;&amp; nums) &#123;
+        res.clear();
+        path.clear();
+        backtrace(nums);
         return res;
     &#125;
 &#125;;
@@ -847,15 +926,15 @@ public:
           
             <div class="post-nepre half previous">
           
-            <a href="/2022/05/04/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev">
+            <a href="/2022/07/24/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B9%9D%EF%BC%89%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/04.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/04.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/09.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/09.jpg">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                leetcode修炼笔记（四）字符串</h3>
+                leetcode修炼笔记（九）贪心算法</h3>
                 <hr>
               </div>
             </a>
@@ -865,15 +944,15 @@ public:
           
             <div class="post-nepre half next">
           
-            <a href="/2022/04/21/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E9%93%BE%E8%A1%A8/" rel="next">
+            <a href="/2022/05/28/leetcode%E4%BF%AE%E7%82%BC%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/02.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/02.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/07.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/staythere/cdn@latest/pic/blog_cover/07.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                leetcode修炼笔记（二）链表</h3>
+                leetcode修炼笔记（七）二叉树</h3>
                 <hr>
               </div>
             </a>
